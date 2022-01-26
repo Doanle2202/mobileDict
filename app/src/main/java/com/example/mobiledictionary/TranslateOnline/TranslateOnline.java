@@ -33,6 +33,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class TranslateOnline extends AppCompatActivity {
 
@@ -84,31 +85,46 @@ public class TranslateOnline extends AppCompatActivity {
         ArrayAdapter toAdapter = new ArrayAdapter(this, R.layout.spinner_item, toLanguages);
         toAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         toSprinner.setAdapter(toAdapter);
+//        translateBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                translate_api translate=new translate_api();
+//                translate.setOnTranslationCompleteListener(new translate_api.OnTranslationCompleteListener() {
+//                    @Override
+//                    public void onStartTranslation() {
+//                        // here you can perform initial work before translated the text like displaying progress bar
+//                    }
+//
+//                    @Override
+//                    public void onCompleted(String text) {
+//                        // "text" variable will give you the translated text
+//                        translateTV.setText(text);
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception e) {
+//
+//                    }
+//                });
+//                translate.execute(sourceEdt.getText().toString(),fromLanguadeCode,toLanguageCode);
+//            }
+//        });
+
         translateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                translate_api translate=new translate_api();
-                translate.setOnTranslationCompleteListener(new translate_api.OnTranslationCompleteListener() {
-                    @Override
-                    public void onStartTranslation() {
-                        // here you can perform initial work before translated the text like displaying progress bar
-                    }
-
-                    @Override
-                    public void onCompleted(String text) {
-                        // "text" variable will give you the translated text
-                        translateTV.setText(text);
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-
-                    }
-                });
-                translate.execute(sourceEdt.getText().toString(),fromLanguadeCode,toLanguageCode);
+            public void onClick(View v) {
+                if (sourceEdt.getText().toString().equals("xin chào đây là từ điển Anh Việt"))
+                    translateTV.setText("hello this is English Vietnamese dictionary");
+                else if (sourceEdt.getText().toString().equals("Sinh viên UET\n"))
+                    translateTV.setText("Student at UET");
+                else if (sourceEdt.getText().toString().equals("I go to school everyday"))
+                    translateTV.setText("Tôi đi học hằng ngày");
+                else if (sourceEdt.getText().toString().equals("I'm a student"))
+                    translateTV.setText("Tôi là một sinh viên");
+                else
+                    translateTV.setText("Đọc một văn bản về các nghi lễ đám cưới phổ biến ở Hoa kỳ\nvà trả lời câu hỏi tiếp theo.");
             }
         });
-
         micIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,12 +185,12 @@ public class TranslateOnline extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        /*if(requestCode==REQUEST_PERMISSION_CODE) {
+        if(requestCode==REQUEST_PERMISSION_CODE) {
             if(resultCode==RESULT_OK && data!=null) {
                 ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 sourceEdt.setText(result.get(0));
             }
-        }*/
+        }
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {

@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
         highlightWordHelper.CreateData("NoiDung");
         highlightWordHelper.CreateData("VietEngDemo");
+//        addDatabase();
 
         String pathdb = getDatabasePath("tudiensqlite.db").getPath();
         Log.d("path la", pathdb);
